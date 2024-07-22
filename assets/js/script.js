@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let button of buttons) {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type")  === "submit") {
-                alert("you clicked submit!");
+                checkAnswer();
                 //getAttribute refer to the custom attribute assigned in css and html
                 //this is referring t any button pressed by the customer
             }
@@ -49,11 +49,46 @@ function runGame(gameType) {
   }
 }
 
+/**
+ * check the answer against the first element in the returned
+ * calculatedcorrectanswer array (first object)
+ */
 function checkAnswer() {
+    //retrieve the value from the DOM, parseint is required for be sure
+    //it will be a number and .value is required since it is an input
+    //(innetext is not valid)
+    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    // calculated answer is an array so we need to extract our value
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("hey! you got it right! :D");
+    } else {
+        alert(`awww.. you answered ${userAnswer}, the correct answer is ${calculatedAnswer[0]}!`);
+    }
+    runGame(calculatedAnswer[1]);
 
 }
-
+/**
+ * gets the operand and the operators directly from the DOM and 
+ * return the correct answer.
+ */
 function calculateCorrectAnswer() {
+    // get the value from the dom and use parse for make sure it is an
+    //integer. by default javascript returns strings from the DOm
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById('operator'). innerText;
+
+    if (operator === "+") {
+        // return an array with the sum of the operands and the datatype
+        // that will be used next
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`unimplemented operator ${operator}`);
+        throw `unimplemented operator ${operator}. Aborting!`;
+    }
 
 }
 
