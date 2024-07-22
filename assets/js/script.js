@@ -4,7 +4,7 @@
 //event handler of the eventlistener
 
 document.addEventListener("DOMContentLoaded", function() {
-    let buttons = getElementsByTagName("button");
+    let buttons = document.getElementsByTagName("button");
     //buttons above refer to all the buttons in the html code --> array
     //button of buttons will returns all the items stored in the array
     //and it will assign that to a variable named button
@@ -17,11 +17,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else { 
                 let gameType = this.getAttribute("data-type");
-                alert(`you clicked ${gameType}`);
+                runGame(gameType);
             }
-        })
+        });
     }
-})
+
+    runGame("addition");
+});
 //adding a docstring for a code reference below
 
 /** 
@@ -29,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
 *user answer has been processed
 */
 
-function runGame() {
+function runGame(gameType) {
 // create two random numbers between 1 and 25 
 //we are using math floor for rounding the number to an integer
 //math random for generatin the actual number 
@@ -37,6 +39,14 @@ function runGame() {
 //plus one to avoid the generation of zero
   let num1 = Math.floor(Math.random() * 25) +1;
   let num2 = Math.floor(Math.random() * 25) +1;
+
+  if (gameType === "addition") {
+    displayAdditionQuestion(num1, num2);
+  } else {
+    alert(`unknown game type: ${gameType}`);
+    //trow will abort the game and will print an error in the console
+    throw `unknown game type: ${gameType}. Aborting!`;
+  }
 }
 
 function checkAnswer() {
@@ -55,7 +65,13 @@ function incrementWrongAnswer() {
 
 }
 
-function displayAdditionQuestion() {
+function displayAdditionQuestion(operand1, operand2) {
+    //text shown in the span section
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "+";
+
+
 
 }
 
