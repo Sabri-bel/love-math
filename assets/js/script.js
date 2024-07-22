@@ -22,10 +22,21 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 })
+//adding a docstring for a code reference below
 
+/** 
+*the main game loop is called when the script is loaded and the
+*user answer has been processed
+*/
 
 function runGame() {
-
+// create two random numbers between 1 and 25 
+//we are using math floor for rounding the number to an integer
+//math random for generatin the actual number 
+// multplied 25 for gettin the number in the selected range 
+//plus one to avoid the generation of zero
+  let num1 = Math.floor(Math.random() * 25) +1;
+  let num2 = Math.floor(Math.random() * 25) +1;
 }
 
 function checkAnswer() {
