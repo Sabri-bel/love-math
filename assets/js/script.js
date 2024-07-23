@@ -21,6 +21,15 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+    /**
+     * this is an event listener so the customer can press the enter on the 
+     * keyboard instead of press submit
+     */
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
 
     runGame("addition");
 });
@@ -32,6 +41,10 @@ document.addEventListener("DOMContentLoaded", function() {
 */
 
 function runGame(gameType) {
+    //it will empty the box with the answer provided by the user
+    document.getElementById("answer-box"). value = "";
+    //this let the cursor into the answer box by default
+    document.getElementById("answer-box").focus();
 // create two random numbers between 1 and 25 
 //we are using math floor for rounding the number to an integer
 //math random for generatin the actual number 
